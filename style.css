@@ -250,12 +250,6 @@ fieldset {
     padding: 1rem;
 }
 
-footer {
-    text-align: center;
-    color: var(--teks-lembut);
-    padding: 1.5rem 1rem;
-}
-
 @media (max-width: 640px) {
     .kartu-ringkasan,
     .form {
