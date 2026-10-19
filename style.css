@@ -1,0 +1,268 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f4f6f8;
+    --kartu: #ffffff;
+    --teks: #1f2933;
+    --teks-lembut: #5f6c7b;
+    --garis: #d9dee4;
+    --aksen: #0f766e;
+    --masuk: #15803d;
+    --keluar: #b91c1c;
+    --radius: 12px;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--teks);
+    line-height: 1.5;
+}
+
+.kepala {
+    background: var(--aksen);
+    color: #ffffff;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+.kepala p {
+    opacity: 0.9;
+}
+
+main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: grid;
+    gap: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.kartu-ringkasan {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.kartu {
+    background: var(--kartu);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    padding: 1rem;
+}
+
+.kartu h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--teks-lembut);
+}
+
+.angka {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.angka.minus,
+.pengeluaran .angka {
+    color: var(--keluar);
+}
+
+.pemasukan .angka {
+    color: var(--masuk);
+}
+
+.form {
+    background: var(--kartu);
+    border: 1px solid var(--garis);
+    border-radius: var(--radius);
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.kolom-penuh {
+    grid-column: 1 / -1;
+}
+
+.kolom label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--garis);
+    border-radius: 8px;
+    font: inherit;
+    background: #ffffff;
+}
+
+input[type="radio"] {
+    width: auto;
+}
+
+fieldset {
+    border: 1px solid var(--garis);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+}
+
+.jenis {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.pilihan {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.pesan-error {
+    color: var(--keluar);
+    font-weight: 600;
+}
+
+.pesan-error:empty {
+    display: none;
+}
+
+.tombol {
+    background: var(--aksen);
+    color: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    padding: 0.7rem 1.25rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tombol:hover {
+    filter: brightness(0.9);
+}
+
+:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.filter {
+    background: #ffffff;
+    border: 1px solid var(--garis);
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+.filter.aktif {
+    background: var(--aksen);
+    border-color: var(--aksen);
+    color: #ffffff;
+}
+
+.daftar {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.transaksi {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--kartu);
+    border: 1px solid var(--garis);
+    border-left-width: 6px;
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+}
+
+.transaksi.pemasukan {
+    border-left-color: var(--masuk);
+}
+
+.transaksi.pengeluaran {
+    border-left-color: var(--keluar);
+}
+
+.info {
+    flex: 1;
+}
+
+.meta {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--teks-lembut);
+}
+
+.nominal {
+    font-weight: 700;
+}
+
+.pemasukan .nominal {
+    color: var(--masuk);
+}
+
+.pengeluaran .nominal {
+    color: var(--keluar);
+}
+
+.hapus {
+    background: transparent;
+    border: 1px solid var(--keluar);
+    color: var(--keluar);
+    border-radius: 8px;
+    padding: 0.3rem 0.7rem;
+    font: inherit;
+    cursor: pointer;
+}
+
+.hapus:hover {
+    background: var(--keluar);
+    color: #ffffff;
+}
+
+.kosong {
+    text-align: center;
+    color: var(--teks-lembut);
+    padding: 1rem;
+}
+
+footer {
+    text-align: center;
+    color: var(--teks-lembut);
+    padding: 1.5rem 1rem;
+}
+
+@media (max-width: 640px) {
+    .kartu-ringkasan,
+    .form {
+        grid-template-columns: 1fr;
+    }
+
+    .transaksi {
+        flex-wrap: wrap;
+    }
+}

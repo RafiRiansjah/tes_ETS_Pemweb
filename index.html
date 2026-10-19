@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Money Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="kepala">
+        <h1>Personal Money Management</h1>
+        <p>Catat pemasukan dan pengeluaranmu, pantau saldo setiap hari.</p>
+    </header>
+
+    <main>
+
+        <section class="ringkasan">
+            <h2>Ringkasan</h2>
+            <div class="kartu-ringkasan">
+                <article class="kartu">
+                    <h3>Saldo</h3>
+                    <p id="saldo" class="angka">Rp 0</p>
+                </article>
+                <article class="kartu pemasukan">
+                    <h3>Total pemasukan</h3>
+                    <p id="total-masuk" class="angka">Rp 0</p>
+                </article>
+                <article class="kartu pengeluaran">
+                    <h3>Total pengeluaran</h3>
+                    <p id="total-keluar" class="angka">Rp 0</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="tambah">
+            <h2>Tambah transaksi</h2>
+            <form id="form-transaksi" class="form" action="#" method="get">
+
+                <fieldset class="kolom-penuh jenis">
+                    <legend>Jenis transaksi</legend>
+                    <div class="pilihan">
+                        <input type="radio" id="jenis-keluar" name="jenis" value="pengeluaran" checked>
+                        <label for="jenis-keluar">Pengeluaran</label>
+                    </div>
+                    <div class="pilihan">
+                        <input type="radio" id="jenis-masuk" name="jenis" value="pemasukan">
+                        <label for="jenis-masuk">Pemasukan</label>
+                    </div>
+                </fieldset>
+
+                <div class="kolom">
+                    <label for="nominal">Nominal (Rp)</label>
+                    <input type="number" id="nominal" name="nominal" min="1" placeholder="Contoh: 25000" required>
+                </div>
+
+                <div class="kolom">
+                    <label for="kategori">Kategori</label>
+                    <select id="kategori" name="kategori">
+                        <option value="Makanan">Makanan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Belanja">Belanja</option>
+                        <option value="Tagihan">Tagihan</option>
+                        <option value="Hiburan">Hiburan</option>
+                        <option value="Gaji">Gaji</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="kolom">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="date" id="tanggal" name="tanggal" required>
+                </div>
+
+                <div class="kolom">
+                    <label for="catatan">Catatan</label>
+                    <input type="text" id="catatan" name="catatan" placeholder="Contoh: makan siang" required>
+                </div>
+
+                <p id="pesan-error" class="pesan-error kolom-penuh" role="alert"></p>
+
+                <div class="kolom-penuh">
+                    <button type="submit" class="tombol">Simpan transaksi</button>
+                </div>
+
+            </form>
+        </section>
+
+        <section class="riwayat">
+            <h2>Riwayat transaksi</h2>
+
+            <div id="filter-group" class="filter-group">
+                <button type="button" class="filter aktif" data-filter="semua" aria-pressed="true">Semua</button>
+                <button type="button" class="filter" data-filter="pemasukan" aria-pressed="false">Pemasukan</button>
+                <button type="button" class="filter" data-filter="pengeluaran" aria-pressed="false">Pengeluaran</button>
+            </div>
+
+            <ul id="daftar-transaksi" class="daftar"></ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Personal Money Management</p>
+    </footer>
+
+</body>
+</html>
