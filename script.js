@@ -1,15 +1,19 @@
-// ===== 1. ELEMEN DOM =====
 const elSaldo = document.querySelector("#saldo");
 const elTotalMasuk = document.querySelector("#total-masuk");
 const elTotalKeluar = document.querySelector("#total-keluar");
 const elForm = document.querySelector("#form-transaksi");
+const elKategori = document.querySelector("#kategori");
 const elTanggal = document.querySelector("#tanggal");
 const elPesanError = document.querySelector("#pesan-error");
 const elFilterGroup = document.querySelector("#filter-group");
 const elDaftar = document.querySelector("#daftar-transaksi");
 
-// ===== 2. PENYIMPANAN (localStorage) =====
 const KUNCI_STORAGE = "pmm-transaksi";
+
+const KATEGORI = {
+    pengeluaran: ["Makanan", "Transportasi", "Belanja", "Tagihan", "Hiburan", "Lainnya"],
+    pemasukan: ["Gaji", "Uang saku", "Bonus", "Lainnya"]
+};
 
 function muatData() {
     try {
@@ -38,14 +42,12 @@ function simpanData() {
     }
 }
 
-// ===== 3. STATE =====
 let transaksi = muatData();
 let filterAktif = "semua";
 let idBerikutnya = transaksi.reduce(function (maks, t) {
     return Math.max(maks, t.id);
 }, 0) + 1;
 
-// ===== 4. FUNGSI BANTU =====
 function formatRupiah(angka) {
     const tanda = angka < 0 ? "-" : "";
     return tanda + "Rp " + Math.abs(angka).toLocaleString("id-ID");
@@ -64,7 +66,21 @@ function isiTanggalHariIni() {
     elTanggal.value = tahun + "-" + bulan + "-" + hari;
 }
 
-// ===== 5. RINGKASAN =====
+function ambilJenisTerpilih() {
+    return document.querySelector('input[name="jenis"]:checked').value;
+}
+
+function isiKategori(jenis) {
+    elKategori.innerHTML = "";
+
+    for (const nama of KATEGORI[jenis]) {
+        const opsi = document.createElement("option");
+        opsi.value = nama;
+        opsi.textContent = nama;
+        elKategori.appendChild(opsi);
+    }
+}
+
 function hitungRingkasan() {
     let totalMasuk = 0;
     let totalKeluar = 0;
@@ -92,7 +108,6 @@ function renderRingkasan() {
     elTotalKeluar.textContent = formatRupiah(hasil.totalKeluar);
 }
 
-// ===== 6. RENDER DAFTAR =====
 function ambilTransaksiTampil() {
     const urut = [...transaksi].sort(function (a, b) {
         if (a.tanggal !== b.tanggal) {
@@ -148,7 +163,7 @@ function render() {
         const kosong = document.createElement("li");
         kosong.className = "kosong";
         kosong.textContent = transaksi.length === 0
-            ? "Belum ada transaksi. Tambahkan lewat form di atas."
+            ? "Belum ada riwayat transaksi, yuk catat!"
             : "Tidak ada transaksi pada filter ini.";
         elDaftar.appendChild(kosong);
     } else {
@@ -160,7 +175,12 @@ function render() {
     renderRingkasan();
 }
 
-// ===== 7. EVENT: SUBMIT FORM =====
+for (const radio of document.querySelectorAll('input[name="jenis"]')) {
+    radio.addEventListener("change", function () {
+        isiKategori(radio.value);
+    });
+}
+
 elForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -198,10 +218,10 @@ elForm.addEventListener("submit", function (event) {
     render();
 
     elForm.reset();
+    isiKategori(ambilJenisTerpilih());
     isiTanggalHariIni();
 });
 
-// ===== 8. EVENT: KLIK HAPUS =====
 elDaftar.addEventListener("click", function (event) {
     const tombol = event.target.closest(".hapus");
     if (!tombol) {
@@ -221,7 +241,6 @@ elDaftar.addEventListener("click", function (event) {
     render();
 });
 
-// ===== 9. EVENT: KLIK FILTER =====
 elFilterGroup.addEventListener("click", function (event) {
     const tombol = event.target.closest(".filter");
     if (!tombol) {
@@ -239,6 +258,6 @@ elFilterGroup.addEventListener("click", function (event) {
     render();
 });
 
-// ===== 10. INISIALISASI =====
+isiKategori(ambilJenisTerpilih());
 isiTanggalHariIni();
 render();
